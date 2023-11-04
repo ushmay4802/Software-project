@@ -3,6 +3,7 @@ const express = require("express");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv").config("./.env");
+const mongoose = require('mongoose'); 
 
 //save express instance to app
 const app = express();
@@ -15,33 +16,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 
 //env variables
-const host = process.env.DB_HOST;
-const user = process.env.DB_USER;
-const password = process.env.DB_PASSWORD;
-const database = process.env.DB_DATABASE;
 const PORT = process.env.PORT; 
 
 //route handler
 app.use("/", routes);
 //driver code
 
-
-connection.connect((error) => {
-  if (error) {
-    throw error;
-  } else {
-    console.log("Connection created to databse");
-    console.log("Starting server on port: ", PORT);
-    
-  }
-});
-connection.query("SHOW TABLES", (err, result) => {
-    if(err){
-        throw err; 
-    }
-    console.log(result[0].Tables_in_test);
-})
-app.listen(PORT, (req, res) => {
+mongoose.connect(process.env.MONGO_URI)
+.then(() => {
+  app.listen(PORT, (req, res) => {
+    console.log("Database connected"); 
     console.log("Server started");
   });
+}).catch((err) => {
+  console.log("There is a problem in starting server");
+})
 
