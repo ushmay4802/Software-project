@@ -2,7 +2,6 @@
 const express = require("express");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
-const mysql2 = require("mysql2");
 const dotenv = require("dotenv").config("./.env");
 
 //save express instance to app
@@ -26,12 +25,7 @@ const PORT = process.env.PORT;
 app.use("/", routes);
 //driver code
 
-const connection = mysql2.createConnection({
-  host: host,
-  user: user,
-  password: password,
-  database: database,
-});
+
 connection.connect((error) => {
   if (error) {
     throw error;
