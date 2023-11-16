@@ -1,34 +1,35 @@
-//module imports
+// import node modules
 const express = require("express");
-const morgan = require("morgan");
-const bodyParser = require("body-parser");
+const cors = require("cors");
 const dotenv = require("dotenv").config("./.env");
-const mongoose = require('mongoose'); 
-
-//save express instance to app
+const mongoose = require("mongoose");
+//create experss instance
 const app = express();
 
-//local imports
-const routes = require("./routes/routes");
+//import routes. 
+const userRoutes = require('./routes/userRoutes');
+const detailRoutes = require('./routes/detailRoutes');
+//configure env variables
+const PORT = process.env.PORT;
+const MONGO_URI = process.env.MONGO_URI;
+//using global middleware
+app.use(cors());
 
-//app settings
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(morgan("dev"));
-
-//env variables
-const PORT = process.env.PORT; 
-
-//route handler
-app.use("/", routes);
-//driver code
-
-mongoose.connect(process.env.MONGO_URI)
-.then(() => {
-  app.listen(PORT, (req, res) => {
-    console.log("Database connected"); 
-    console.log("Server started");
+//setting up routes
+app.use(userRoutes); 
+app.use(detailRoutes);
+//start server
+mongoose
+  .connect(MONGO_URI)
+  .then(() => {
+    console.log("Database connected");
+    app.listen(PORT, () => {
+      console.log("Server started on port: ", PORT);
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+    console.log(
+      "An error occured while connecting to database or starting server"
+    );
   });
-}).catch((err) => {
-  console.log("There is a problem in starting server");
-})
-
