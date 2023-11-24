@@ -4,7 +4,7 @@
   display: flex;
   padding: 13px 29px;
   align-items: center;
-  gap: 375px;
+  gap: 300px;
   background: #E2EFF8;
 }
 
@@ -12,20 +12,27 @@
 .symbol{
 display: inline-flex;
 width: 50px;
-height: 40px;
+height: 20px;
 padding: 10px;
 justify-content: center;
 align-items: center;
 gap: 10px;
 flex-shrink: 0;
-background: #4069D2;
 }
 
+.symbol img{
+  height: 50px;
+  width: 80px;
+  padding-top: 4px;
+}
+
+
 .navbar-content{
-  display: inline-flex;
+display: inline-flex;
 justify-content: center;
 align-items: center;
 gap: 34px;
+padding-left: 100px;
 
 
 }
@@ -40,6 +47,7 @@ font-style: normal;
 font-weight: 400;
 line-height: normal;
 text-decoration: none;
+text-align: center;
 }
 
 .about-us{
@@ -51,6 +59,7 @@ font-size: 25px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
+text-align: center;
 text-decoration: none;
 }
 
@@ -64,6 +73,7 @@ font-size: 25px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
+text-align: center;
 }
 
 .navbar-button{
@@ -92,5 +102,21 @@ font-size: 12px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
+text-align: center;
 
+}
+.pricing{
+  display: flex;
+width: 87px;
+height: 24px;
+flex-direction: column;
+justify-content: center;
+color: #000;
+text-align: center;
+font-family: Inter;
+font-size: 25px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+text-decoration: none;
 }

@@ -52,7 +52,19 @@ const Profile = () => {
           </div>
         </div>
 
+       
+
       </div>
+
+      <div className='profile-table'>
+          <div className='profile-table1'>
+            <div className='profile-table-content'></div>
+          </div>
+          <div className='profile-table1'>
+          <div className='profile-table-content'></div>
+          </div>
+
+        </div>
 
     </div>) : (<p>No user data available</p>)}
   

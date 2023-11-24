@@ -97,3 +97,28 @@ line-height: normal;
   background: #CBCAFF;
   align-items: center;
 }
+
+.profile-table
+{
+  display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 50px;
+}
+
+.profile-table1{
+  display: flex;
+  padding: 30px 37px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+background: #E2EFF8;
+}
+
+.profile-table-content{
+width: 824px;
+height: 281px;
+background: #893939;
+}

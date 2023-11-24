@@ -1,6 +1,7 @@
 import React, { useState,useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {useUser} from './UserContext';
+import symbol from './Gratler.png';
 
 import './Login.css';
 
@@ -60,7 +61,17 @@ const Login = () => {
 </div>
         </div>
         <div className='curve-box'>
+          <div>
+          <img src={symbol} alt="symbol" />
+          </div>
+          <div>
+          <label className='gratler-text'>Gratler</label> 
+          </div>
+          <div>
+            <label className='gratler-slogan'>Sharing the Road, Sharing the Load</label>
+          </div>
         </div>
+        
 
       </div>
   );
