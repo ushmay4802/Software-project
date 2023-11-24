@@ -5,13 +5,17 @@ const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const storedUsername = JSON.parse(localStorage.getItem('userInfo'))?.username;
 
-  const [userInfo, setUserInfo] = useState(storedUsername ? JSON.parse(localStorage.getItem(`userInfo_${storedUsername}`)) : null);
+  const [userInfo, setUserInfo] = useState(JSON.parse(localStorage.getItem(`userInfo`)));
 
   useEffect(() => {
     if (userInfo) {
-      localStorage.setItem(`userInfo_${userInfo.username}`, JSON.stringify(userInfo));
+      localStorage.setItem(`userInfo`, JSON.stringify(userInfo));
     }
   }, [userInfo]);
+
+  // useEffect(()=>{
+  //   localStorage.setItem(`userInfo_${userInfo.username}`, JSON.stringify(userInfo));
+  // },[] )
 
   return (
     <UserContext.Provider value={{ userInfo, setUserInfo }}>
