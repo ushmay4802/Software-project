@@ -8,8 +8,15 @@
   button{
     cursor: pointer;
     transition: background-color 0.3s ease;
+    border-style: groove;
   }
+
+
 
   button:hover {
     background-color: #75e222; /* Change the color when hovering */
+  }
+
+  input{
+    border-style: groove;
   }

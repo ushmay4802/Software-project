@@ -54,6 +54,7 @@ const Login = () => {
 <div className='text-holder'>
 <input type="text" className='login-username'  placeholder="Username" value={usernamein} onChange={(e) => {setUsernamein(e.target.value)}}/>
 <input type="password" placeholder='Password' className='login-password' value={passwordin} onChange={(e) => {setPasswordin(e.target.value)}}/>
+{error && <div className="error-message" style={{ color: 'red', position: 'absolute', bottom: '290px',left:'285px' }}>{error}</div>}
 </div>
 <div className='login-signup'>
 <button className='login-button' onClick={handleLogin} disabled={isLoading}>{isLoading ? 'Logging in...' : 'Login'}</button>

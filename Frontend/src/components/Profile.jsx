@@ -1,21 +1,33 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState } from 'react';
+import { FaPen } from 'react-icons/fa';
 import './Profile.css';
 import {useUser } from './UserContext';
 const Profile = () => {
     const {userInfo} = useUser();
     const [profileData, setProfileData] = useState(JSON.parse(localStorage.getItem(`userInfo`)));
+    const [image, setImage] = useState(localStorage.getItem('userImage') || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png');
 
-  //   useEffect(()=>{
-  //     setProfileData(userInfo);
-  //   },[]);
-    
-  // const handleChange = (field, value) => {
-  //   setProfileData((prevData) => ({
-  //     ...prevData,
-  //     [field]: value,
-  //   }));
-  // };
 
+
+  
+    const handleImageChange = (e) => {
+      const file = e.target.files[0];
+      
+      if (file) {
+        const reader = new FileReader();
+        
+        reader.onloadend = () => {
+          const imageData = reader.result;
+
+      // Save image data to localStorage
+      localStorage.setItem('userImage', imageData);
+
+      setImage(imageData);
+        };
+  
+        reader.readAsDataURL(file);
+      }
+    }
   const handleSave = () => {
     console.log('Saving profile data:', profileData);
   };
@@ -25,7 +37,18 @@ const Profile = () => {
 { profileData ?( <div className='profile-back'>
       <div className='profile-detail'>
         <div className='profile-pic'>
-          <div className='profile-picture'></div>
+        <div className='profile-picture' style={{ backgroundImage: `url(${image})` }}>
+        <label htmlFor="fileInput" className="edit-icon" >
+          <FaPen></FaPen> Edit
+        </label>
+        <input
+          type="file"
+          id="fileInput"
+          accept="image/*"
+          style={{ display: 'none' }}
+          onChange={handleImageChange}
+        />
+      </div>
           <div className='profile-username-pic'>{profileData.username}</div>
         </div>
         <div className='profile-line'></div>

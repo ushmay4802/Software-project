@@ -18,6 +18,8 @@ const Navbar = () => {
 
 
   const logout = () =>{
+    localStorage.removeItem('userImage');
+    localStorage.removeItem('userInfo');
     navigate('/');
   }
   

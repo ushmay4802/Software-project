@@ -35,10 +35,7 @@ select{
   width: 600px;
   margin-bottom: 1rem;
 }
-.error {
-  color: red;
-  font-size: 12px;
-}
+
 
 
 @media (max-width: 768px) {
@@ -111,6 +108,7 @@ justify-content: space-between;
 align-items: center;
 border-radius: 15px;
 background: #CBCAFF;
+border-style: groove;
 }
 
 .registration-final{
@@ -157,3 +155,7 @@ align-items: center;
 text-decoration: none;
 }
 
+
+.error {
+  color: red;
+}

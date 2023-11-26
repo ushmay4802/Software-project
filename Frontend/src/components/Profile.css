@@ -35,11 +35,11 @@ background: #E2EFF8;
 height: 100px;
 background: #CBCAFF;
 border-radius: 50%;
-background-image: url(https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png);
 background-size: cover;
 }
 
 .profile-username-pic{
+  padding-top: 20px;
   width: 199px;
 height: 45px;
 color: #000;
@@ -121,4 +121,12 @@ background: #E2EFF8;
 width: 824px;
 height: 281px;
 background: #893939;
+}
+
+.edit-icon{
+  position: absolute;
+    bottom: 480px;
+    left: 177px;
+        width: 60px;
+    
 }

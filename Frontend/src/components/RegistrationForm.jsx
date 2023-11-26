@@ -106,48 +106,48 @@ const RegistrationForm = () => {
   <div className='input-1'>
     <div>
     <input type='text'  value={first}  onChange={(e) => setFirst (e.target.value)}placeholder='First Name' className='firstname'></input>
-    {errors.first && <div className="error">{errors.first}</div>}
+    {errors.first && <div  style={{ color: 'red', position: 'absolute', bottom: '472px',left:'520px' }} className="error" >{errors.first}</div>}
     </div>
     
     <div>
     <input type='text' value={last}  onChange={(e) => setLast(e.target.value)} placeholder='Last Name' className='firstname' required></input>
-    {errors.last && <div className="error">{errors.last}</div>}
+    {errors.last && <div style={{ color: 'red', position: 'absolute', bottom: '472px',left:'985px' }} className="error">{errors.last}</div>}
     </div>
   </div>
   <div className='input-1'>
     <div>
     <input  type='text'  value={username}  onChange={(e) => setUsername(e.target.value)} placeholder='Userame' className='firstname' required></input>
-    {errors.username && <div className="error">{errors.username}</div>}
+    {errors.username && <div style={{ color: 'red', position: 'absolute', bottom: '380px',left:'520px' }} className="error">{errors.username}</div>}
     </div>
     <div>
     <input type='password' value={password}  onChange={(e) => setPassword(e.target.value)} placeholder='Password' className='firstname' required></input>
-    {errors.password && <div className="error">{errors.password}</div>}
+    {errors.password && <div style={{ color: 'red', position: 'absolute', bottom: '380px',left:'985px' }} className="error">{errors.password}</div>}
     </div>
   </div>
   <div className='input-1'>
     <div>
   <input type="date" className='firstname' value={dob} onChange={(e) => setDob(e.target.value)} required />
-  {errors.dob && <div className="error">{errors.dob}</div>}
+  {errors.dob && <div  style={{ color: 'red', position: 'absolute', bottom: '285px',left:'520px' }} className="error">{errors.dob}</div>}
     </div>
 
     <div>
-  <select value={gender}  className="firstname" onChange={(e) => setGender(e.target.value)} required>
+  <select value={gender}  className="firstname"  style={{borderWidth:'2px'}} onChange={(e) => setGender(e.target.value)} required>
       <option value="">Select Gender</option>
       <option value="male">Male</option>
       <option value="female">Female</option>
       <option value="other">Other</option>
   </select>
-  {errors.gender && <div className="error">{errors.gender}</div>}
+  {errors.gender && <div style={{ color: 'red', position: 'absolute', bottom: '285px',left:'985px' }} className="error">{errors.gender}</div>}
     </div>
   </div>
   <div className='input-1'>
     <div>
     <input type='text' placeholder='Phone No.' className='firstname' value={phone}  onChange={(e) => setPhone(e.target.value)} required></input>
-    {errors.phone && <div className="error">{errors.phone}</div>}
+    {errors.phone && <div style={{ color: 'red', position: 'absolute', bottom: '192px',left:'520px' }} className="error">{errors.phone}</div>}
     </div>
     <div>
     <input type='text' placeholder='Email' className='firstname' value={email}  onChange={(e) => setEmail(e.target.value)} required></input>
-    {errors.email && <div className="error">{errors.email}</div>}
+    {errors.email && <div style={{ color: 'red', position: 'absolute', bottom: '192px',left:'985px' }} className="error">{errors.email}</div>}
     </div>
   </div>
 </div>
