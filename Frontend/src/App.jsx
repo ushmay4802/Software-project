@@ -13,6 +13,7 @@ import Passengerlist from './components/Passengerlist';
 import Bookride from './components/Bookride';
 import { Rideprovider } from './components/Ridecontext';
 import Ridelist from './components/Ridelist';
+import Pricing from './components/Pricing';
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
     <Route path = "/Passengerlist" element={<Passengerlist/>}></Route>
     <Route path = "/Bookride" element={<Bookride/>}></Route>
     <Route path = "/Ridelist" element={<Ridelist/>}></Route>
+    <Route path = "/Pricing" element={<Pricing/>}></Route>
       </Routes>
       </Rideprovider>
       </UserProvider>

@@ -26,10 +26,22 @@ border-radius: 15px;
 background: #E2EFF8;
 }
 
-.ride-content{
+.ride-content-1{
 width: 582px;
 height: 600px;
-background: #893939;
+background-image: url('./driver.png');
+background-repeat: no-repeat;
+opacity: 0.8;
+background-size: 100% 85%;
+}
+
+.ride-content-2{
+  width: 582px;
+  height: 600px;
+  background-image: url('Bookride-image.png');
+  background-repeat: no-repeat;  
+  opacity: 0.8;
+  background-size: 100% 85%;
 }
 
 .ride-button{
@@ -43,7 +55,18 @@ background: #35B5DE;
 color: #000;
 text-align: center;
 font-family: Inter;
-font-size: 18px;
+font-size: 24px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+.content {
+  margin-top: 500px;
+  color: #000;
+text-align: justify;
+font-family: Inter;
+font-size: 20px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
