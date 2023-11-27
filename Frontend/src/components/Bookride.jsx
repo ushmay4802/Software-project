@@ -8,6 +8,7 @@ const Bookride = () => {
     const [isfrom, setfrom] = useState('');
     const [isto, setto] = useState('');
     const {setRideInfo} = useRide();
+    const [newridelist,setnewridelist] = useState([]);
     const {RideInfo} = useRide();
 
     const [errors, setErrors] = useState({
@@ -42,7 +43,9 @@ if (!rideresponse.ok) {
 
   const ridearray = await rideresponse.json();
   setRideInfo(ridearray);
-            navigate('/Ridelist');
+  setnewridelist(ridearray);
+console.log(newridelist);
+
 
 
         }catch (error) {
@@ -52,30 +55,21 @@ if (!rideresponse.ok) {
           }
     }
 
-    const handleKeyPress = (event) => {
-        if (event.key === 'Enter') {
-            handleride();
-        }
-    };
+    useEffect(()=>{
+console.log("ride",newridelist);
+    },[])
 
-    useEffect(() => {
-        document.addEventListener('keydown', handleKeyPress);
-        return () => {
-            document.removeEventListener('keydown', handleKeyPress);
-        };
-    }, []);
 
     return (
 
         <>
-
         <div className="bookride">
 
 <div className="bookride-input">
     <div className="bookride-input-text">
         <div className="bookride-text">From</div>
-        <div className="bookride-text">To</div>
-        <div className="bookride-text">Passenger</div>
+        <div className="bookride-text" style={{paddingLeft:'10px'}}>To</div>
+        <div className="bookride-text" style={{paddingLeft:'15px'}}>Passenger</div>
     </div>
     <div className="bookride-input-field">
         <div>
@@ -103,44 +97,16 @@ if (!rideresponse.ok) {
 
 <button className="bookride-button"  onClick={handleride}>Submit</button>
 
-<div className="bookride-ridelist"></div>
+<div className="bookride-ridelist">
 
+
+
+{newridelist.length!==0 ? (<div>data</div>):(<div>No data</div>)}
+</div>
 
         </div>
         
         </>
-        // <div className="licence-container">
-    
-
-        //     <div className="detail">
-        //         <label>No of passengers: </label>
-        //         <select value={ispassengercount} onChange={(e) => { setpassengercount(e.target.value) }} required>
-        //             <option value="">Select seat</option>
-        //             <option value="1">1</option>
-        //             <option value="2">2</option>
-        //             <option value="3">3</option>
-        //             <option value="4">4</option>
-        //             <option value="5">5</option>
-        //         </select>
-        //         <div className="error-message">{errors.seat}</div>
-        //     </div>
-
-        //     <div className="detail">
-        //         <label >From:</label>
-        //         <input type="text" value={isfrom} onChange={(e) => { setfrom(e.target.value) }} required />
-        //         <div className="error-message">{errors.from}</div>
-        //     </div>
-
-        //     <div className="detail">
-        //         <label >To:</label>
-        //         <input type="text" value={isto} onChange={(e) => { setto(e.target.value) }} required />
-        //         <div className="error-message">{errors.to}</div>
-        //     </div>
-
-        //     <div className="submit">
-        //         <button onClick={handleride}>Submit</button>
-        //     </div>
-        // </div>
     );
 }
 

@@ -6,7 +6,7 @@ justify-content: center;
 align-items: center;
 gap: 52px;
 height: 100vh;
-background: #35B5DE;
+background: rgba(53, 181, 222, 1);
 }
 
 .bookride-input{
@@ -21,6 +21,7 @@ align-items: center;
     justify-content: center;
     align-items: center;
     gap: 79px;
+    padding-left: 5px;
 }
 
 .bookride-text{
@@ -49,6 +50,8 @@ gap: 79px;
     height: 35px;
     background: #E2EFF8;
     border-style: groove;
+    border-radius: 15px;
+    padding-left: 15px;
 }
 .bookride-button{
     display: flex;
@@ -70,9 +73,9 @@ line-height: normal;
 }
 
 .bookride-ridelist{
-    width: 1093px;
+width: 1093px;
 height: 594px;
-background: #893939;
+background: #E2EFF8;
 }
 
 .bookride-error{

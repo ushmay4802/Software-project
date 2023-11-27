@@ -19,4 +19,14 @@
 
   input{
     border-style: groove;
+    
+  }
+
+  ::placeholder{
+    color: black;
+  }
+
+  select{
+    border-style: groove;
+    border-width: 2px;
   }

@@ -1,59 +1,14 @@
-/* 
-.container {
-  max-width: 600px; 
-  margin: 0 auto;
-  padding: 10%;
-  border-radius: 5px;
-  border: solid black;
-  background-color: white;
-}
-
-label {
-  display: block;
-  margin-bottom: 10px;
-}
-
-input,
-select,
-button {
-  width: 500px;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  flex: 1;
-}
-.register{
-  margin-top: 2rem;
-}
-button {
-  width: 525px;
-  color: #fff;
-  cursor: pointer;
-}
-
-select{
-  width: 600px;
-  margin-bottom: 1rem;
-}
-
-
-
-@media (max-width: 768px) {
-  .container {
-    width: 100%;
-  }
-} */
-
-
 .registration{
-display: flex;
-width: 100%;
-height: 100vh;
-flex-direction: column;
-justify-content: center;
-align-items: flex-end;
-gap: 10px;
-background: #35B5DE;
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  background: #35B5DE;
+  align-content: center;
+
 }
 
 .registration-box{
@@ -158,4 +113,26 @@ text-decoration: none;
 
 .error {
   color: red;
+}
+.registration-img{
+  width: 310px;
+height: 500px;
+padding-right: 90px;
+padding-bottom: 120px;
+flex-shrink: 0;
+align-items: center;
+  text-align: center;
+
+}
+
+.registration img{
+  height: 250px;
+  width: 200px;
+
+}
+
+.registration-gratler{
+  font-size: 80px;
+  
+
 }

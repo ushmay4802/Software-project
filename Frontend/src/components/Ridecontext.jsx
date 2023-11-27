@@ -7,10 +7,6 @@ export const Rideprovider = ({ children }) => {
 
   const [RideInfo, setRideInfo] = useState([]);
 
-  useEffect(()=>{
-
-  },[RideInfo])
-
 
   return (
     <Ridecontext.Provider value={{ RideInfo, setRideInfo }}>
