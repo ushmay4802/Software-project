@@ -102,10 +102,8 @@ const RegistrationForm = () => {
           <img src={symbol} alt="symbol" />
           <label className="registration-gratler">Gratler</label>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id,
-            facilis. Natus atque illo quasi reiciendis modi, nulla optio,
-            corporis fugiat mollitia excepturi, necessitatibus voluptatum at
-            veritatis numquam. Delectus, omnis incidunt!
+            "Carpooling made easy: Register in a blink, share the ride, and
+            enjoy the journey!"
           </p>
         </div>
       </div>
