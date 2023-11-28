@@ -73,9 +73,12 @@ line-height: normal;
 }
 
 .bookride-ridelist{
-width: 1093px;
+width: 1150px;
 height: 594px;
 background: #E2EFF8;
+border: solid black;
+border-radius: 15px;
+    border-width: 2px;
 }
 
 .bookride-error{
@@ -98,7 +101,8 @@ background: #E2EFF8;
 }
 
 .order{
-    display: flex;
+    width: 95%;
+display: flex;
 padding: 17px 18px;
 align-items: center;
 gap: 23px;
@@ -116,6 +120,7 @@ background: #CBCAFF;
   }
 .confirm-btn{
     display: flex;
+    margin-left: 80px;
 width: 100px;
 height: 24px;
 padding: 9px 20px;
