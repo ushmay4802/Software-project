@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-import './Passengerlist.css';
+import "./Passengerlist.css";
 
 const Passengerlist = () => {
-
   const [names, setNames] = useState([]);
 
   // Use some static data for testing
@@ -41,26 +40,24 @@ const Passengerlist = () => {
     <div className="Passengerlist-main">
       <div className="Passengerlist-box">
         <label className="Passengertext">Passenger List</label>
-        
+
         <div className="Passengerlist-detail">
           {names.map((name, index) => (
-
-            <div className="list">
-            <div key={index} className="order">
-              <div className="textstyle">
-                Passenger Username: {name.username} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Gender: {name.gender} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Seats: {name.seats}
+            <div className="Passengerlist-list">
+              <div key={index} className="-Passengerlistorder">
+                <div className="Passengerlist-textstyle">
+                  Passenger Username: {name.username} &nbsp; &nbsp; &nbsp;
+                  &nbsp; &nbsp;Gender: {name.gender} &nbsp; &nbsp; &nbsp; &nbsp;
+                  &nbsp;Seats: {name.seats}
+                </div>
+                <button className="Passengerlist-confirm-btn">Confirm</button>
               </div>
-              <button className="confirm-btn">
-                Confirm
-              </button>
-            </div>
             </div>
           ))}
-          </div>
-        
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default Passengerlist;

@@ -93,6 +93,7 @@ exports.passengerRide = (req, ress) => {
     from: req.params.isfrom,
     to: req.params.isto,
   };
+  console.log("query")
   RideDetails.find(query)
     .then((res) => {
       console.log(res);

@@ -35,7 +35,7 @@ height: 63px;
 }
 
 
-.list{
+.Passengerlist-list{
     display: flex;
     height: 80px;
     padding: 5px 13px 1px 13px;
@@ -45,7 +45,7 @@ height: 63px;
    
 }
 
-.order{
+.Passengerlist-order{
     display: flex;
 padding: 17px 18px;
 align-items: center;
@@ -62,7 +62,7 @@ background: #CBCAFF;
 .Passengerlist-detail::-webkit-scrollbar {
     width: 0; /* Remove scrollbar space */
   }
-.confirm-btn{
+.Passengerlist-confirm-btn{
     display: flex;
 width: 100px;
 height: 24px;
@@ -75,7 +75,7 @@ background: #35B5DE;
 box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.textstyle{
+.Passengerlist-textstyle{
     display: flex;
 width: 961px;
 height: 37px;

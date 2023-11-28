@@ -9,7 +9,6 @@ const Bookride = () => {
   const [isto, setto] = useState("");
   const { setRideInfo } = useRide();
   const [newridelist, setnewridelist] = useState([]);
-  const { RideInfo } = useRide();
 
   const [errors, setErrors] = useState({
     seat: "",
@@ -42,6 +41,7 @@ const Bookride = () => {
       }
 
       const ridearray = await rideresponse.json();
+      console.log("ride", ridearray);
       setRideInfo(ridearray);
       setnewridelist(ridearray);
       console.log(newridelist);
@@ -51,10 +51,6 @@ const Bookride = () => {
       console.log("finally");
     }
   };
-
-  useEffect(() => {
-    console.log("ride", newridelist);
-  }, []);
 
   return (
     <>
@@ -154,16 +150,20 @@ const Bookride = () => {
           {newridelist.length === 0 ? (
             <div> no data</div>
           ) : (
-            <div>
-              <h1>List of Rides</h1>
-              <ul>
-                {newridelist.map((rides, index) => (
-                  <li key={index}>
-                    {rides.driver_username},{rides.code},{rides.from}
-                    <button>confirm</button>
-                  </li>
-                ))}
-              </ul>
+            <div className="ridelist-detail">
+              {newridelist.map((rides, index) => (
+                <div className="list">
+                  <div key={index} className="order">
+                    <div className="textstyle">
+                      Driver Username: {rides.driver_username} &nbsp; &nbsp;
+                      &nbsp; &nbsp; &nbsp;Gender:Male &nbsp; &nbsp; &nbsp;
+                      &nbsp; &nbsp;Seats Available: {rides.seat} &nbsp; &nbsp;
+                      &nbsp; &nbsp; &nbsp;Charge(per km): {rides.charge}
+                    </div>
+                    <button className="confirm-btn">Request</button>
+                  </div>
+                </div>
+              ))}
             </div>
           )}
         </div>
