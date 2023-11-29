@@ -1,7 +1,48 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import "./Pricing.css";
+import { useUser } from "./UserContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Pricing = () => {
+  const [isamount, setamount] = useState(100);
+  const { userInfo, setUserInfo } = useUser();
+
+  const handlewallet = async ({ value }) => {
+    const localamount = localStorage.getItem("userInfo");
+    const storeddata = JSON.parse(localamount);
+    let currentWalletValue = parseFloat(storeddata["wallet"]);
+
+    currentWalletValue += parseFloat(value);
+
+    storeddata["wallet"] = currentWalletValue.toString();
+
+    localStorage.setItem("userInfo", JSON.stringify(storeddata));
+    setUserInfo(storeddata);
+
+    const walletdata = {
+      username: userInfo.username,
+      amount: parseFloat(value),
+    };
+    const requestOptions = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(walletdata),
+    };
+    try {
+      const response = await fetch(
+        "http://localhost:3300/token",
+        requestOptions
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      } else {
+        toast("Amount added", { type: "success" });
+      }
+    } catch (error) {
+      console.error("Error adding amount:", error);
+    }
+  };
   return (
     <div className="mainn">
       <div className="boxx">
@@ -53,7 +94,12 @@ const Pricing = () => {
               </div>
             </div>
           </div>
-          <button className="pricing-btn">Buy Now</button>
+          <button
+            className="pricing-btn"
+            onClick={() => handlewallet({ value: 10 })}
+          >
+            Buy Now
+          </button>
         </div>
         <div className="innerr">
           <div className="pricing-content">
@@ -99,7 +145,12 @@ const Pricing = () => {
               </div>
             </div>
           </div>
-          <button className="pricing-btn">Buy Now</button>
+          <button
+            className="pricing-btn"
+            onClick={() => handlewallet({ value: 100 })}
+          >
+            Buy Now
+          </button>
         </div>
         <div className="innerr">
           <div className="pricing-content">
@@ -140,7 +191,12 @@ const Pricing = () => {
               </div>
             </div>
           </div>
-          <button className="pricing-btn">Buy Now</button>
+          <button
+            className="pricing-btn"
+            onClick={() => handlewallet({ value: 1000 })}
+          >
+            Buy Now
+          </button>
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 const RideDetails = require("../models/rides");
 const User = require("../models/user");
+
 exports.riderDetails = async (req, ress) => {
   await RideDetails.create({ ...req.body, code: req.uniqueCode })
     .then((res) => {
@@ -9,6 +10,7 @@ exports.riderDetails = async (req, ress) => {
       ress.send(err.message);
     });
 };
+
 exports.createRide = async (req, res) => {
   try {
     const {

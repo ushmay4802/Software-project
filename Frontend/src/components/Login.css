@@ -136,37 +136,3 @@ padding-top: 110px;
   font-size: 30px;
   padding-left: 130px;
 }
-/* Responsive styles */
-
-@media (max-width: 768px) {
-  .login {
-    flex-direction: column;
-    gap: 1.25rem;
-  }
-
-  .login-box {
-    height: auto;
-    padding: 2rem;
-  }
-
-  .login-text {
-    font-size: 3rem;
-  }
-
-  .account-text {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .login-username,
-  .login-password,
-  .login-button {
-    width: 100%;
-  }
-
-  .curve-box {
-    width: 100%;
-    border-radius: 0;
-  }
-}
