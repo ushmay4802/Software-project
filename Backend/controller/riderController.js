@@ -30,7 +30,6 @@ exports.createRide = async (req, res) => {
       code,
     } = req.body;
     const user = await User.findOne({ username: driver_username });
-    console.log(user);
     var driverId = null;
     const nameOfDriver = `${user.first} ${user.last}`;
     if (user) {
@@ -95,10 +94,8 @@ exports.passengerRide = (req, ress) => {
     from: req.params.isfrom,
     to: req.params.isto,
   };
-  console.log("query")
   RideDetails.find(query)
     .then((res) => {
-      console.log(res);
       const responseArray = Array.isArray(res) ? res : [res];
       ress.send(responseArray);
     })
@@ -106,3 +103,65 @@ exports.passengerRide = (req, ress) => {
       console.log("error", err.message);
     });
 };
+
+const passengerMap = new Map();
+const printPassengerMap = () => {
+  passengerMap.forEach((innerMap, outerKey) => {
+    console.log(`Outer Key: ${outerKey}`);
+    
+    innerMap.forEach((value, innerKey) => {
+      // Stringify the inner key if it's an object
+      const formattedInnerKey = typeof innerKey === 'object' ? JSON.stringify(innerKey) : innerKey;
+      console.log(`  Inner Key: ${formattedInnerKey}, Value: ${value}`);
+    });
+  });
+};
+const setBooleanValue = (outerKey, innerKey, value) => {
+  // If the outer map doesn't exist, create it
+  if (!passengerMap.has(outerKey)) {
+    passengerMap.set(outerKey, new Map());
+  }
+
+  // Get the inner map for the outer key
+  const innerMap = passengerMap.get(outerKey);
+
+  console.log("innerKey", innerKey);
+
+  
+
+  
+  const formattedInnerKey = typeof innerKey === 'object' ? JSON.stringify(innerKey) : innerKey;
+  // Check if the inner map already has the innerKey
+
+  if (!innerMap.has(formattedInnerKey)) {
+    // Set the boolean value in the inner map
+    innerMap.set(innerKey, value);
+  } else {
+    // Update the existing boolean value if the innerKey already exists
+    console.log(`Inner key '${innerKey}' already exists for outer key '${outerKey}'. Updating value to '${value}'.`);
+    innerMap.set(innerKey, value);
+  }
+
+  printPassengerMap();
+};
+
+exports.passengerlist = (req,ress) => {
+  outerKey = req.body.driverUsername;
+  innerKey = req.body.passengerData;
+  value = req.body.flag;
+
+  
+
+try{
+  
+ 
+  setBooleanValue(outerKey,innerKey,value);
+  ress.send("Added successfully");
+
+}
+catch (error) {
+console.log(error.message);
+ress.send(error);
+  }
+
+}

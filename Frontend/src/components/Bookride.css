@@ -145,3 +145,14 @@ font-style: normal;
 font-weight: 400;
 line-height: normal;
 }
+
+.nodata{
+    color: black;
+    display: flex;
+    height: 500px;
+    text-align: center;
+    font-size: 60px;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}

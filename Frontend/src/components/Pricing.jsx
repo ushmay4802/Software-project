@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import "./Pricing.css";
 import { useUser } from "./UserContext";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 const Pricing = () => {
   const [isamount, setamount] = useState(100);
+  const [showPopup, setShowPopup] = useState(false);
+
   const { userInfo, setUserInfo } = useUser();
 
   const handlewallet = async ({ value }) => {
+    setamount(value);
     const localamount = localStorage.getItem("userInfo");
     const storeddata = JSON.parse(localamount);
     let currentWalletValue = parseFloat(storeddata["wallet"]);
@@ -37,7 +38,12 @@ const Pricing = () => {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       } else {
-        toast("Amount added", { type: "success" });
+        setShowPopup(true);
+
+        // Close the popup after 1000 milliseconds (1 second)
+        setTimeout(() => {
+          setShowPopup(false);
+        }, 1500);
       }
     } catch (error) {
       console.error("Error adding amount:", error);
@@ -45,6 +51,11 @@ const Pricing = () => {
   };
   return (
     <div className="mainn">
+      {showPopup && (
+        <div className="popup">
+          <p>{`Amount $${isamount} added to wallet!`}</p>
+        </div>
+      )}
       <div className="boxx">
         <div className="innerr">
           <div className="pricing-content">

@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+
 import RegistrationForm from "./components/RegistrationForm";
 import Layout from "./components/Layout";
 import Login from "./components/Login";

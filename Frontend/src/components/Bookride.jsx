@@ -2,23 +2,31 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRide } from "./Ridecontext";
 import "./Bookride.css";
+import { useUser } from "./UserContext";
 
 const Bookride = () => {
+  const userInfo = useUser();
   const [ispassengercount, setpassengercount] = useState("");
   const [isfrom, setfrom] = useState("");
   const [isto, setto] = useState("");
   const { setRideInfo } = useRide();
   const [newridelist, setnewridelist] = useState([]);
+  const [isdata, setdata] = useState("No Data");
+  const [buttonTexts, setButtonTexts] = useState([]);
 
   const [errors, setErrors] = useState({
     seat: "",
     from: "",
     to: "",
   });
+  useEffect(() => {
+    setButtonTexts(Array(isdata.length).fill("Request"));
+  }, [isdata]);
 
   const navigate = useNavigate();
 
   const handleride = async () => {
+    setdata("No Rides Available");
     const newErrors = {
       seat: ispassengercount ? "" : "Please select no of passengers.",
       from: isfrom ? "" : "Please enter the starting location.",
@@ -49,6 +57,41 @@ const Bookride = () => {
       console.error("Error fetching data:", error);
     } finally {
       console.log("finally");
+    }
+  };
+
+  const handlerequest = async ({ index, rides }) => {
+    setButtonTexts((prevButtonTexts) => {
+      const newButtonTexts = [...prevButtonTexts];
+      newButtonTexts[index] = "Requested!";
+      return newButtonTexts;
+    });
+
+    const passengerRequest = {
+      driverUsername: rides.driver_username,
+      passengerData: userInfo,
+      flag: true,
+    };
+
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(passengerRequest),
+    };
+    console.log("requested1");
+
+    try {
+      const res = await fetch(
+        `http://localhost:3300/passengerlist`,
+        requestOptions
+      );
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+      console.log("Added");
+    } catch (err) {
+      console.log(err.message);
     }
   };
 
@@ -142,13 +185,18 @@ const Bookride = () => {
           </div>
         </div>
 
-        <button className="bookride-button" onClick={handleride}>
+        <button
+          className="bookride-button"
+          onClick={() => {
+            handleride();
+          }}
+        >
           Submit
         </button>
 
         <div className="bookride-ridelist">
           {newridelist.length === 0 ? (
-            <div> no data</div>
+            <div className="nodata"> {isdata}</div>
           ) : (
             <div className="ridelist-detail">
               {newridelist.map((rides, index) => (
@@ -160,7 +208,15 @@ const Bookride = () => {
                       &nbsp; &nbsp;Seats Available: {rides.seat} &nbsp; &nbsp;
                       &nbsp; &nbsp; &nbsp;Charge(per km): {rides.charge}
                     </div>
-                    <button className="confirm-btn">Request</button>
+                    <button
+                      className="confirm-btn"
+                      onClick={() => {
+                        handlerequest({ index, rides });
+                      }}
+                    >
+                      {" "}
+                      {buttonTexts[index]}
+                    </button>
                   </div>
                 </div>
               ))}

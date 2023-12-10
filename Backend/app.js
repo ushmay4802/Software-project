@@ -4,8 +4,10 @@ const cors = require("cors");
 const dotenv = require('dotenv').config({path : '../.env'});
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser'); 
+
 //create experss instance
 const app = express();
+
 
 //import routes.
 const userRoutes = require("./routes/userRoutes");
@@ -32,9 +34,12 @@ mongoose
       console.log("Server started on port: ", PORT);
     });
   })
+
   .catch((err) => {
     console.log(err);
     console.log(
       "An error occured while connecting to database or starting server"
     );
   });
+
+

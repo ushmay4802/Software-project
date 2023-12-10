@@ -44,7 +44,7 @@ const Passengerlist = () => {
         <div className="Passengerlist-detail">
           {names.map((name, index) => (
             <div className="Passengerlist-list">
-              <div key={index} className="-Passengerlistorder">
+              <div key={index} className="Passengerlist-order">
                 <div className="Passengerlist-textstyle">
                   Passenger Username: {name.username} &nbsp; &nbsp; &nbsp;
                   &nbsp; &nbsp;Gender: {name.gender} &nbsp; &nbsp; &nbsp; &nbsp;

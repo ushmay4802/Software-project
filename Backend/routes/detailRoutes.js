@@ -9,5 +9,5 @@ router.post('/createRide', riderController.createRide);
 router.get("/passengerride/:ispassengercount/:isfrom/:isto",riderController.passengerRide);
 router.get('/getRideInformation/:riderUsername', riderController.rideInformation); 
 router.get('/getPassengerRide/:passengerUsername', riderController.passengerRideInformation); 
-
+router.post('/passengerlist',riderController.passengerlist);
 module.exports = router;

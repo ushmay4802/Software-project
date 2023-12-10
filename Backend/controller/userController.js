@@ -22,13 +22,12 @@ exports.register = async (req, res) => {
     });
 };
 
-exports.token = async(req,res) =>{
-  console.log("value",req.body.amount);
-  await User.updateOne({username: req.body.username},{$inc: {wallet: req.body.amount}}) 
-  .then((response) => {
-    res.send(response);
-  })
-  .catch((error) => {
-    res.status(500).json({ error: "Internal Server Error" });
-  });
+exports.token = async (req, res) => {
+  await User.updateOne({ username: req.body.username }, { $inc: { wallet: req.body.amount } })
+    .then((response) => {
+      res.send(response);
+    })
+    .catch((error) => {
+      res.status(500).json({ error: "Internal Server Error" });
+    });
 }
