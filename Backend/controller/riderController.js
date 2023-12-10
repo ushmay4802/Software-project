@@ -105,18 +105,8 @@ exports.passengerRide = (req, ress) => {
 };
 
 const passengerMap = new Map();
-const printPassengerMap = () => {
-  passengerMap.forEach((innerMap, outerKey) => {
-    console.log(`Outer Key: ${outerKey}`);
-    
-    innerMap.forEach((value, innerKey) => {
-      // Stringify the inner key if it's an object
-      const formattedInnerKey = typeof innerKey === 'object' ? JSON.stringify(innerKey) : innerKey;
-      console.log(`  Inner Key: ${formattedInnerKey}, Value: ${value}`);
-    });
-  });
-};
-const setBooleanValue = (outerKey, innerKey, value) => {
+
+const setBooleanValue = (outerKey, innerKey,data, value) => {
   // If the outer map doesn't exist, create it
   if (!passengerMap.has(outerKey)) {
     passengerMap.set(outerKey, new Map());
@@ -124,25 +114,18 @@ const setBooleanValue = (outerKey, innerKey, value) => {
 
   // Get the inner map for the outer key
   const innerMap = passengerMap.get(outerKey);
-
-  console.log("innerKey", innerKey);
-
   
-
-  
-  const formattedInnerKey = typeof innerKey === 'object' ? JSON.stringify(innerKey) : innerKey;
+ 
   // Check if the inner map already has the innerKey
 
-  if (!innerMap.has(formattedInnerKey)) {
+  if (!innerMap.has(innerKey)) {
     // Set the boolean value in the inner map
-    innerMap.set(innerKey, value);
+    innerMap.set(innerKey,{data,value});
   } else {
-    // Update the existing boolean value if the innerKey already exists
-    console.log(`Inner key '${innerKey}' already exists for outer key '${outerKey}'. Updating value to '${value}'.`);
-    innerMap.set(innerKey, value);
-  }
+    innerMap.set(innerKey, {data,value});
+  } 
 
-  printPassengerMap();
+ // printPassengerMap(outerKey);
 };
 
 exports.passengerlist = (req,ress) => {
@@ -150,18 +133,53 @@ exports.passengerlist = (req,ress) => {
   innerKey = req.body.passengerData;
   value = req.body.flag;
 
-  
+  const formattedInnerKey = typeof innerKey === 'object' ? JSON.stringify(innerKey) : innerKey;
+  const innerKeyObject = JSON.parse(formattedInnerKey);
 
 try{
-  
- 
-  setBooleanValue(outerKey,innerKey,value);
+  setBooleanValue(outerKey,innerKeyObject.username,innerKeyObject,value);
   ress.send("Added successfully");
-
 }
 catch (error) {
 console.log(error.message);
 ress.send(error);
   }
+
+}
+
+exports.passengerRequest = (req,ress) =>{
+  const driverUsername = req.params.driverUsername;
+
+  if (!driverUsername || !passengerMap.has(driverUsername)) {
+    return "already";
+  }
+
+  const innerMap = passengerMap.get(driverUsername);
+  const responseData = {
+    innerMap: Array.from(innerMap.entries()).map(([innerKey, pair]) => ({
+    data: pair.data,
+    })),
+  };
+
+  ress.send(responseData);
+}
+
+exports.deleteRequest = (req,ress) =>{
+  const InnerKey = req.body.passenger;
+
+ console.log(InnerKey);
+
+  for (const [outerKey, innerMap] of passengerMap.entries()) {
+    // Check if the inner map exists and contains the fixed inner key
+    if (innerMap.has(InnerKey)) {
+      // Delete the entry with the fixed inner key
+      innerMap.delete(InnerKey);
+      console.log("delete");
+      console.log(`Deleted entry with fixed inner key '${InnerKey}' for outerKey '${outerKey}'.`);
+    }
+  }
+
+  ress.send("Deleted");
+
 
 }

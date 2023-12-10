@@ -16,6 +16,7 @@ import { Rideprovider } from "./components/Ridecontext";
 import Ridelist from "./components/Ridelist";
 import Pricing from "./components/Pricing";
 import About from "./components/About";
+import Driverbill from "./components/Driverbill";
 
 function App() {
   // useEffect(() => {
@@ -52,6 +53,10 @@ function App() {
                 <Route path="/Ridelist" element={<Ridelist />}></Route>
                 <Route path="/Pricing" element={<Pricing />}></Route>
                 <Route path="/About" element={<About />}></Route>
+                <Route
+                  path="/Driverbill/:objectString"
+                  element={<Driverbill></Driverbill>}
+                ></Route>
               </Routes>
             </Rideprovider>
           </UserProvider>

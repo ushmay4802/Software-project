@@ -49,7 +49,6 @@ const Bookride = () => {
       }
 
       const ridearray = await rideresponse.json();
-      console.log("ride", ridearray);
       setRideInfo(ridearray);
       setnewridelist(ridearray);
       console.log(newridelist);
@@ -61,37 +60,49 @@ const Bookride = () => {
   };
 
   const handlerequest = async ({ index, rides }) => {
-    setButtonTexts((prevButtonTexts) => {
-      const newButtonTexts = [...prevButtonTexts];
-      newButtonTexts[index] = "Requested!";
-      return newButtonTexts;
-    });
+    if (buttonTexts[index] === "Request") {
+      setButtonTexts((prevButtonTexts) => {
+        const newButtonTexts = [...prevButtonTexts];
+        newButtonTexts[index] = "Cancel";
+        return newButtonTexts;
+      });
 
-    const passengerRequest = {
-      driverUsername: rides.driver_username,
-      passengerData: userInfo,
-      flag: true,
-    };
+      const userRequestData = { ...userInfo.userInfo };
+      userRequestData["seat"] = ispassengercount;
 
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(passengerRequest),
-    };
-    console.log("requested1");
+      const passengerRequest = {
+        driverUsername: rides.driver_username,
+        passengerData: userRequestData,
+        flag: true,
+      };
 
-    try {
-      const res = await fetch(
-        `http://localhost:3300/passengerlist`,
-        requestOptions
-      );
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(passengerRequest),
+      };
 
-      if (!res.ok) {
-        throw new Error(`HTTP error! Status: ${res.status}`);
+      try {
+        const res = await fetch(
+          `http://localhost:3300/passengerlist`,
+          requestOptions
+        );
+
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        console.log("Added");
+      } catch (err) {
+        console.log(err.message);
       }
-      console.log("Added");
-    } catch (err) {
-      console.log(err.message);
+    } else {
+      console.log("already Requested");
+
+      setButtonTexts((prevButtonTexts) => {
+        const newButtonTexts = [...prevButtonTexts];
+        newButtonTexts[index] = "Request";
+        return newButtonTexts;
+      });
     }
   };
 
@@ -204,12 +215,16 @@ const Bookride = () => {
                   <div key={index} className="order">
                     <div className="textstyle">
                       Driver Username: {rides.driver_username} &nbsp; &nbsp;
-                      &nbsp; &nbsp; &nbsp;Gender:Male &nbsp; &nbsp; &nbsp;
-                      &nbsp; &nbsp;Seats Available: {rides.seat} &nbsp; &nbsp;
-                      &nbsp; &nbsp; &nbsp;Charge(per km): {rides.charge}
+                      &nbsp; &nbsp;Gender:Male &nbsp; &nbsp; &nbsp; &nbsp;Seats
+                      Available: {rides.seat} &nbsp; &nbsp; &nbsp; &nbsp;
+                      Charge(per km): {rides.charge}
                     </div>
                     <button
                       className="confirm-btn"
+                      style={{
+                        backgroundColor:
+                          buttonTexts[index] === "Request" ? "" : "#75e222",
+                      }}
                       onClick={() => {
                         handlerequest({ index, rides });
                       }}

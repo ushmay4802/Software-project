@@ -10,4 +10,6 @@ router.get("/passengerride/:ispassengercount/:isfrom/:isto",riderController.pass
 router.get('/getRideInformation/:riderUsername', riderController.rideInformation); 
 router.get('/getPassengerRide/:passengerUsername', riderController.passengerRideInformation); 
 router.post('/passengerlist',riderController.passengerlist);
+router.get('/passengerRequest/:driverUsername',riderController.passengerRequest);
+router.post('/requestDelete',riderController.deleteRequest);
 module.exports = router;
