@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaPen } from "react-icons/fa";
+import { format } from "date-fns";
 import "./Profile.css";
 const Profile = () => {
   const [profileData, setProfileData] = useState(
@@ -125,23 +126,88 @@ const Profile = () => {
 
           <div className="profile-table">
             <div className="profile-table1">
+              <div>
+                <div className="profilelisttext">Ride Provided</div>
+              </div>
               <div className="profile-table-content">
-                {isdriver.map((isdri, index) => (
-                  <>
-                    <div key={index}>
-                      <div className="textstyle">
-                        Driver: {isdri.Driver} &nbsp; &nbsp; &nbsp;
-                        &nbsp;Passeneger: {isdri.Passenger} &nbsp; &nbsp; &nbsp;
-                        &nbsp;Seats Date: {isdri.Date} &nbsp; &nbsp; &nbsp;
-                        &nbsp; Amount: {isdri.Amount}
-                      </div>
-                    </div>
-                  </>
-                ))}
+                <div className="table-container">
+                  <table className="table-style">
+                    <thead>
+                      <tr>
+                        <th>Driver</th>
+                        <th>Passenger</th>
+                        <th>Seats Date</th>
+                        <th>Amount</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Distance</th>
+                        <th>Seat</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {isdriver.map((ispass, index) => (
+                        <tr key={index}>
+                          <td>{ispass.Driver}</td>
+                          <td>{ispass.Passenger}</td>
+                          <td>
+                            {format(new Date(ispass.Date), "yyyy-MM-dd", {
+                              timeZone: "UTC",
+                            })}
+                          </td>
+                          <td>{ispass.Amount}</td>
+                          <td>{ispass.From}</td>
+                          <td>{ispass.To}</td>
+                          <td>{ispass.DistanceTravelled}</td>
+                          <td>{ispass.TotalPassenger}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
+
             <div className="profile-table1">
-              <div className="profile-table-content"></div>
+              <div>
+                <div className="profilelisttext">Ride Taken</div>
+              </div>
+              <div className="profile-table-content">
+                <div className="table-container">
+                  <table className="table-style">
+                    <thead>
+                      <tr>
+                        <th>Driver</th>
+                        <th>Passenger</th>
+                        <th>Seats Date</th>
+                        <th>Amount</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Distance</th>
+                        <th>Seat</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {ispassenger.map((ispass, index) => (
+                        <tr key={index}>
+                          <td>{ispass.Driver}</td>
+                          <td>{ispass.Passenger}</td>
+                          <td>
+                            {" "}
+                            {format(new Date(ispass.Date), "yyyy-MM-dd", {
+                              timeZone: "UTC",
+                            })}
+                          </td>
+                          <td>{ispass.Amount}</td>
+                          <td>{ispass.From}</td>
+                          <td>{ispass.To}</td>
+                          <td>{ispass.DistanceTravelled}</td>
+                          <td>{ispass.TotalPassenger}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -53,7 +53,7 @@ const Pricing = () => {
     <div className="mainn">
       {showPopup && (
         <div className="popup">
-          <p>{`Amount $${isamount} added to wallet!`}</p>
+          <p>{`${isamount}🪙 added to wallet!`}</p>
         </div>
       )}
       <div className="boxx">
@@ -65,7 +65,7 @@ const Pricing = () => {
                 <path stroke="currentColor" d="M4 7.5L7 10l4-5" />
               </svg>
               <div style={{ marginLeft: "8px", fontSize: "1.5em" }}>
-                Rs100/10km
+                10🪙 for 9$
               </div>
             </div>
 
@@ -120,7 +120,7 @@ const Pricing = () => {
                 <path stroke="currentColor" d="M4 7.5L7 10l4-5" />
               </svg>
               <div style={{ marginLeft: "8px", fontSize: "1.5em" }}>
-                Rs100/10km
+                25🪙 for 22$
               </div>
             </div>
 
@@ -158,7 +158,7 @@ const Pricing = () => {
           </div>
           <button
             className="pricing-btn"
-            onClick={() => handlewallet({ value: 100 })}
+            onClick={() => handlewallet({ value: 25 })}
           >
             Buy Now
           </button>
@@ -171,7 +171,7 @@ const Pricing = () => {
                 <path stroke="currentColor" d="M4 7.5L7 10l4-5" />
               </svg>
               <div style={{ marginLeft: "8px", fontSize: "1.5em" }}>
-                Rs100/10km
+                55🪙 for 45$
               </div>
             </div>
 
@@ -204,7 +204,7 @@ const Pricing = () => {
           </div>
           <button
             className="pricing-btn"
-            onClick={() => handlewallet({ value: 1000 })}
+            onClick={() => handlewallet({ value: 55 })}
           >
             Buy Now
           </button>

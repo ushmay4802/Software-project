@@ -52,13 +52,50 @@ const RegistrationForm = () => {
     if (Object.values(newErrors).some((error) => error !== "")) {
       return;
     }
-    const error = {
-      username: "atleast 5 character",
-    };
-    if (username.length < 5) {
-      setErrors(error);
+    if (username.length < 5 || username.length > 12) {
+      setErrors({ username: "contain 5 to 12 characters" });
       return;
     }
+
+    const alphanumericRegex = /[a-zA-Z0-9]/;
+    const specialRegex = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/;
+
+    if (
+      password.length < 8 ||
+      password.length > 12 ||
+      specialRegex.test(password) === true ||
+      alphanumericRegex.test(password) === true
+    ) {
+      setErrors({
+        password: "contain 8 to 12 characters and contain 1 special character",
+      });
+      return;
+    }
+
+    if (last.length > 15) {
+      setErrors({ last: "last name should be less than 15 character" });
+      return;
+    }
+
+    if (first.length > 15) {
+      setErrors({ first: "last name should be less than 15 character" });
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (emailRegex.test(email) === false) {
+      setErrors({ email: "not a valid email" });
+      return;
+    }
+
+    const phoneRegex = /^\d{10}$/;
+
+    if (phoneRegex.test(phoneRegex) === false) {
+      setErrors({ phone: "not valid phone number" });
+      return;
+    }
+
     // Send data to the server for processing
     const userData = {
       last,
@@ -284,7 +321,7 @@ const RegistrationForm = () => {
             </div>
             <div>
               <input
-                type="text"
+                type="Email"
                 placeholder="Email"
                 className="firstname"
                 value={email}

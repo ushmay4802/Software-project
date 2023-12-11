@@ -4,6 +4,9 @@ import { useRide } from "./Ridecontext";
 import "./About.css";
 import vanshitImage from "../uploadss/image.jpg";
 import varunImage from "../uploadss/varun.jpeg";
+import ushmayImage from "../uploadss/ushmay.jpg";
+import prathamImage from "../uploadss/Pratham.jpg";
+import yaxImage from "../uploadss/yax.jpg";
 const About = () => {
   return (
     <div className="about">
@@ -39,17 +42,35 @@ const About = () => {
             style={{ width: "243px", height: "263px" }}
           />
         </div>
-        <div className="photo-cfo"></div>
-        <div className="photo-cfo"></div>
-        <div className="photo-cfo"></div>
+        <div className="photo-cfo">
+          <img
+            src={ushmayImage}
+            alt="photooo"
+            style={{ width: "243px", height: "263px" }}
+          />
+        </div>
+        <div className="photo-cfo">
+          <img
+            src={prathamImage}
+            alt="photooo"
+            style={{ width: "243px", height: "263px" }}
+          />
+        </div>
+        <div className="photo-cfo">
+          <img
+            src={yaxImage}
+            alt="photooo"
+            style={{ width: "243px", height: "263px" }}
+          />
+        </div>
       </div>
 
       <div className="name-cfo">
         <div className="cfo-1">Vanshit Shah</div>
-        <div className="cfo-1"></div>
-        <div className="cfo-1"></div>
-        <div className="cfo-1"></div>
-        <div className="cfo-1"></div>
+        <div className="cfo-1">Varun Parekh</div>
+        <div className="cfo-1">Ushmay Patel</div>
+        <div className="cfo-1">Pratham Lalwani</div>
+        <div className="cfo-1">Yax Prajapati</div>
       </div>
     </div>
   );
