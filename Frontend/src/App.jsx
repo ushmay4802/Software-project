@@ -17,6 +17,8 @@ import Ridelist from "./components/Ridelist";
 import Pricing from "./components/Pricing";
 import About from "./components/About";
 import Driverbill from "./components/Driverbill";
+import Passengerbill from "./components/Passengerbill";
+import Feedback from "./components/Feedback";
 
 function App() {
   // useEffect(() => {
@@ -56,6 +58,14 @@ function App() {
                 <Route
                   path="/Driverbill/:objectString"
                   element={<Driverbill></Driverbill>}
+                ></Route>
+                <Route
+                  path="/Passengerbill/:driverdata"
+                  element={<Passengerbill></Passengerbill>}
+                ></Route>
+                <Route
+                  path="/Feedback/:drivername"
+                  element={<Feedback></Feedback>}
                 ></Route>
               </Routes>
             </Rideprovider>

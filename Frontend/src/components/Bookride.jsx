@@ -133,19 +133,47 @@ const Bookride = () => {
   };
 
   useEffect(() => {
-    const userName = userInfo.userInfo.username;
+    const fetchFlag = async () => {
+      const userName = userInfo.userInfo.username;
 
-    try {
-      const res = fetch(`http://localhost:3300/confirmbook/${userName}`);
+      try {
+        const res = await fetch(
+          `http://localhost:3300/confirmbook/${userName}`
+        );
 
-      if (!res.ok) {
-        throw new Error(`HTTP error! Status: ${res.status}`);
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+
+        const userData = await res.json(); // Await the JSON parsing
+        const billdata = {
+          driver: "ushmay",
+          from: isfrom,
+          to: isto,
+          seat: ispassengercount,
+          amount: 10 * 10,
+        };
+        const driverdata = encodeURIComponent(JSON.stringify(billdata));
+        if (userData.flg === "false") {
+          console.log("false");
+          navigate(`/Passengerbill/${driverdata}`);
+        }
+      } catch (error) {
+        console.log(error);
       }
+    };
 
-      console.log("user", res);
-    } catch (error) {
-      console.log(error);
-    }
+    fetchFlag();
+
+    const intervalId = setInterval(() => {
+      fetchFlag();
+    }, 1000);
+
+    // Cleanup: Clear the interval when the component unmounts
+    return () => {
+      clearInterval(intervalId);
+      // Update the flag when the component is unmounted
+    };
   }, [newridelist]);
 
   return (

@@ -6,6 +6,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 const Driverbill = () => {
   const userInfo = useUser();
+  const { setUserInfo } = useUser();
   const { objectString } = useParams();
   const [currentDate, setCurrentDate] = useState(new Date());
   const formattedDate = currentDate.toLocaleDateString();
@@ -27,19 +28,18 @@ const Driverbill = () => {
       amount: distanceTravelled * parseInt(billdata.charge),
     };
 
-    if (
-      userInfo.userInfo.wallet <
-      formattedDistanceTravelled * parseInt(billdata.charge)
-    ) {
-      setShowPopup(true);
+    const localamount = localStorage.getItem("userInfo");
+    const storeddata = JSON.parse(localamount);
+    let currentWalletValue = parseFloat(storeddata["wallet"]);
 
-      // Close the popup after 1000 milliseconds (1 second)
-      setTimeout(() => {
-        setShowPopup(false);
-      }, 1500);
-      return;
-    }
+    currentWalletValue += parseFloat(
+      distanceTravelled * parseInt(billdata.charge)
+    );
 
+    storeddata["wallet"] = currentWalletValue.toString();
+
+    localStorage.setItem("userInfo", JSON.stringify(storeddata));
+    setUserInfo(storeddata);
     try {
       const requestOptions = {
         method: "POST",

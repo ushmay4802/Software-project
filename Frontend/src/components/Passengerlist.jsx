@@ -57,6 +57,7 @@ const Passengerlist = () => {
     try {
       const requestData = {
         passenger: name.data.username,
+        driver: userInfo.username,
       };
       const requestOptions = {
         method: "POST",
