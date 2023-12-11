@@ -69,6 +69,10 @@ const Bookride = () => {
 
       const userRequestData = { ...userInfo.userInfo };
       userRequestData["seat"] = ispassengercount;
+      userRequestData["charge"] = rides.charge;
+      userRequestData["from"] = rides.from;
+      userRequestData["to"] = rides.to;
+      userRequestData["driverUsername"] = rides.driver_username;
 
       const passengerRequest = {
         driverUsername: rides.driver_username,
@@ -76,13 +80,13 @@ const Bookride = () => {
         flag: true,
       };
 
-      const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(passengerRequest),
-      };
-
       try {
+        const requestOptions = {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(passengerRequest),
+        };
+
         const res = await fetch(
           `http://localhost:3300/passengerlist`,
           requestOptions
@@ -97,7 +101,29 @@ const Bookride = () => {
       }
     } else {
       console.log("already Requested");
+      const deleteRequest = {
+        driverUsername: rides.driver_username,
+        passengerUsername: userInfo.userInfo.username,
+      };
 
+      try {
+        const requestOptions = {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(deleteRequest),
+        };
+        const res = await fetch(
+          `http://localhost:3300/singleRequest`,
+          requestOptions
+        );
+
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        console.log("Request Deleted");
+      } catch (error) {
+        console.log("error in deleting request");
+      }
       setButtonTexts((prevButtonTexts) => {
         const newButtonTexts = [...prevButtonTexts];
         newButtonTexts[index] = "Request";
@@ -105,6 +131,22 @@ const Bookride = () => {
       });
     }
   };
+
+  useEffect(() => {
+    const userName = userInfo.userInfo.username;
+
+    try {
+      const res = fetch(`http://localhost:3300/confirmbook/${userName}`);
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+
+      console.log("user", res);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [newridelist]);
 
   return (
     <>

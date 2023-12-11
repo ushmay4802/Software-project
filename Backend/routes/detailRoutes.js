@@ -12,4 +12,6 @@ router.get('/getPassengerRide/:passengerUsername', riderController.passengerRide
 router.post('/passengerlist',riderController.passengerlist);
 router.get('/passengerRequest/:driverUsername',riderController.passengerRequest);
 router.post('/requestDelete',riderController.deleteRequest);
+router.post("/singleRequest",riderController.singleRequest);
+router.get("/confirmbook/:userName",riderController.confirmBook);
 module.exports = router;

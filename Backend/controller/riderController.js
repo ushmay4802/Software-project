@@ -1,3 +1,4 @@
+const { json } = require("express");
 const RideDetails = require("../models/rides");
 const User = require("../models/user");
 
@@ -105,6 +106,9 @@ exports.passengerRide = (req, ress) => {
 };
 
 const passengerMap = new Map();
+const requestFlag = new Map();
+
+
 
 const setBooleanValue = (outerKey, innerKey,data, value) => {
   // If the outer map doesn't exist, create it
@@ -121,9 +125,11 @@ const setBooleanValue = (outerKey, innerKey,data, value) => {
   if (!innerMap.has(innerKey)) {
     // Set the boolean value in the inner map
     innerMap.set(innerKey,{data,value});
+    requestFlag.set(innerKey,value);
   } else {
     innerMap.set(innerKey, {data,value});
   } 
+
 
  // printPassengerMap(outerKey);
 };
@@ -167,7 +173,8 @@ exports.passengerRequest = (req,ress) =>{
 exports.deleteRequest = (req,ress) =>{
   const InnerKey = req.body.passenger;
 
- console.log(InnerKey);
+requestFlage.set(innerKey,false);
+
 
   for (const [outerKey, innerMap] of passengerMap.entries()) {
     // Check if the inner map exists and contains the fixed inner key
@@ -180,6 +187,49 @@ exports.deleteRequest = (req,ress) =>{
   }
 
   ress.send("Deleted");
+}
+
+exports.singleRequest = (req,ress) =>{
+  const outerkey = req.body.driverUsername;
+  const innerkey = req.body.passengerUsername;
 
 
+
+  const innerMap = passengerMap.get(outerkey);
+
+  if (innerMap.has(innerkey)) {
+    // Delete the entry with the fixed inner key
+    innerMap.delete(innerkey);
+    console.log("delete");
+    console.log(`Deleted entry with fixed inner key '${innerkey}' for outerKey '${outerkey}'.`);
+  }
+  ress.send("Deleted");
+
+}
+
+const print =()=>{
+  console.log("Printing Passenger Map:");
+for (const [outerKey, innerMap] of passengerMap.entries()) {
+  console.log(`Outer Key: ${outerKey}`);
+  console.log("Inner Map:");
+  for (const [innerKey, innerValue] of innerMap.entries()) {
+    console.log(`  Inner Key: ${innerKey}, Inner Value: ${innerValue}`);
+  }
+}
+
+}
+
+exports.confirmBook = (req,ress) =>{
+
+  const innerkey = req.params.userName;
+  console.log("ik",innerkey);
+
+  if (requestFlag.has(innerkey)) {
+  const flag = requestFlag.get(innerkey);
+  const stringValue = flag.toString();
+  ress.send(stringValue);
+} else {
+  console.log(`Inner key '${innerkey}' not found in the requestFlag Map.`);
+  ress.status(404).send('Not Found');
+}
 }

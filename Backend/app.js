@@ -12,6 +12,7 @@ const app = express();
 //import routes.
 const userRoutes = require("./routes/userRoutes");
 const detailRoutes = require("./routes/detailRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 // const tripRoutes = require('./routes/tripRoutes'); 
 //configure env variables
 const PORT = 3300;
@@ -25,6 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 //setting up routes
 app.use(userRoutes);
 app.use(detailRoutes);
+app.use(adminRoutes);
 //start server
 mongoose
   .connect(MONGO_URI)

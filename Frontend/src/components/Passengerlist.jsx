@@ -12,32 +12,45 @@ const Passengerlist = () => {
   // console.log(userInfo.username);
   const navigate = useNavigate();
   useEffect(() => {
+    let isMounted = true; // Flag to track component mount status
+
     const fetchData = async () => {
       try {
         const response = await fetch(
           `http://localhost:3300/passengerRequest/${userInfo.username}`
         );
+
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
         const data = await response.json();
-        setNames(data.innerMap);
+
+        // Check if the component is still mounted before updating state
+        if (isMounted) {
+          setNames(data.innerMap);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
+
+        // If there is an error, stop the interval by clearing the timeout
+        clearInterval(intervalId);
       }
     };
 
     // Initial fetch
     fetchData();
 
-    // Set up interval for fetching data every 5 seconds
+    // Set interval only if there is no error
     const intervalId = setInterval(() => {
       fetchData();
     }, 1000);
 
     // Cleanup: Clear the interval when the component unmounts
-    return () => clearInterval(intervalId);
+    return () => {
+      clearInterval(intervalId);
+      isMounted = false; // Update the flag when the component is unmounted
+    };
   }, [driverUsername]);
 
   const handleconfirm = async (index, name) => {
@@ -61,9 +74,6 @@ const Passengerlist = () => {
       }
 
       const objectString = encodeURIComponent(JSON.stringify(name.data));
-      console.log(objectString);
-      //const billcharge = encodeURIComponent(JSON.stringify());
-      // Navigate to the Driverbill component with the objectString as a parameter
       navigate(`/Driverbill/${objectString}`);
     } catch (error) {
       console.log("not clicked");
