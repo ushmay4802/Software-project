@@ -49,12 +49,9 @@ const RegistrationForm = () => {
     setErrors(newErrors);
 
     // Check if there are any errors
-    if (Object.values(newErrors).some((error) => error !== "")) {
-      return;
-    }
+
     if (username.length < 5 || username.length > 12) {
       setErrors({ username: "contain 5 to 12 characters" });
-      return;
     }
 
     const alphanumericRegex = /[a-zA-Z0-9]/;
@@ -69,30 +66,29 @@ const RegistrationForm = () => {
       setErrors({
         password: "contain 8 to 12 characters and contain 1 special character",
       });
-      return;
     }
 
     if (last.length > 15) {
       setErrors({ last: "last name should be less than 15 character" });
-      return;
     }
 
     if (first.length > 15) {
       setErrors({ first: "last name should be less than 15 character" });
-      return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (emailRegex.test(email) === false) {
       setErrors({ email: "not a valid email" });
-      return;
     }
 
     const phoneRegex = /^\d{10}$/;
 
     if (phoneRegex.test(phoneRegex) === false) {
       setErrors({ phone: "not valid phone number" });
+    }
+
+    if (Object.values(newErrors).some((error) => error !== "")) {
       return;
     }
 

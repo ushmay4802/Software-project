@@ -23,8 +23,11 @@ exports.register = async (req, res) => {
 };
 
 exports.token = async (req, res) => {
+
+  console.log(req.body.amount);
   await User.updateOne({ username: req.body.username }, { $inc: { wallet: req.body.amount } })
     .then((response) => {
+
       res.send(response);
     })
     .catch((error) => {

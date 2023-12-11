@@ -9,12 +9,14 @@ TotalPassenger: Number,
 DistanceTravelled: Number,
 Amount: Number,
 });
+
 const feedbackSchema = new mongoose.Schema({
     Driver:String,
-    Rating : Number,
+    rating : Number,
     Feedback: String
-});
+})
 module.exports = {
     Admin: mongoose.model('Admin', adminSchema),
     Feedback: mongoose.model('Feedback', feedbackSchema)
 };
+  

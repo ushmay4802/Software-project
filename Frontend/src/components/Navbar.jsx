@@ -72,7 +72,7 @@ const Navbar = () => {
             color: "black",
           }}
         >
-          <>🪙</>
+          <>&#x1FA99;</>
           <div>{wallet}</div>
         </Link>
 

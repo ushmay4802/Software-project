@@ -125,7 +125,7 @@ const setBooleanValue = (outerKey, innerKey,data, value) => {
   if (!innerMap.has(innerKey)) {
     // Set the boolean value in the inner map
     innerMap.set(innerKey,{data,value});
-    requestFlag.set(innerKey,{flg: value , driver: outerKey});
+    requestFlag.set(innerKey,{flg: value , driver: outerKey,carno : data.carno});
   } else {
     innerMap.set(innerKey, {data,value});
   } 
@@ -174,8 +174,8 @@ exports.deleteRequest = (req,ress) =>{
   const InnerKey = req.body.passenger;
   const driver = req.body.driver;
 
-
-requestFlag.set(InnerKey,{flg: false , driver: driver});
+const oldMap = requestFlag.get(InnerKey);
+requestFlag.set(InnerKey,{flg: false , driver: driver,carno: oldMap.carno});
 
 
   for (const [outerKey, innerMap] of passengerMap.entries()) {
@@ -231,9 +231,10 @@ exports.confirmBook = (req,ress) =>{
   const flagdata = {
     flg : stringValue,
     driver : flag.driver,
+    carno: flag.carno,
   }
   ress.send(flagdata);
-  requestFlag.set(innerkey,{flg: true , driver: flag.driver});
+  requestFlag.set(innerkey,{flg: true , driver: flag.driver, carno: flag.carno});
 } else {
   console.log(`Inner key '${innerkey}' not found in the requestFlag Map.`);
   ress.status(404).send('Not Found');

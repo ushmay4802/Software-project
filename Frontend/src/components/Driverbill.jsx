@@ -40,6 +40,27 @@ const Driverbill = () => {
 
     localStorage.setItem("userInfo", JSON.stringify(storeddata));
     setUserInfo(storeddata);
+    const walletdata = {
+      username: userInfo.userInfo.username,
+      amount: distanceTravelled * parseInt(billdata.charge),
+    };
+    const requestOptions = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(walletdata),
+    };
+    try {
+      const response = await fetch(
+        "http://localhost:3300/token",
+        requestOptions
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+    } catch (error) {
+      console.error("Error adding amount:", error);
+    }
+
     try {
       const requestOptions = {
         method: "POST",
@@ -77,14 +98,14 @@ const Driverbill = () => {
         </div>
 
         <div className="bill-detail">
-          <div className="bill-input">username: {billdata.username}</div>
+          <div className="bill-input">Passenger: {billdata.username}</div>
           <div className="bill-input">No. of Passenger: {billdata.seat}</div>
           <div className="bill-input">From: {billdata.from}</div>
           <div className="bill-input">To: {billdata.to}</div>
           <div className="bill-input">Date: {formattedDate}</div>
           <div className="bill-input">Distance: {distanceTravelled}</div>
           <div className="bill-input">
-            amount: {10 * parseInt(billdata.charge)}
+            Amount: {10 * parseInt(billdata.charge)}
           </div>
           <button
             className="driverbill-btn"

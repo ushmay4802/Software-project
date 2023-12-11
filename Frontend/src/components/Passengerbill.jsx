@@ -14,6 +14,7 @@ const Passengerbill = () => {
   const navigate = useNavigate();
   const [distanceTravelled, setDistanceTravelled] = useState(10);
   const [showPopup, setShowPopup] = useState(false);
+  const [popuptext, setpopuptext] = useState("");
   const { setUserInfo } = useUser();
 
   const drivername = encodeURIComponent(JSON.stringify(billdata.driver));
@@ -30,9 +31,11 @@ const Passengerbill = () => {
       passenger: billdata.seat,
       distance: distanceTravelled,
       amount: billdata.amount,
+      carno: billdata.carno,
     };
 
     if (userInfo.userInfo.wallet < billdata.amount) {
+      setpopuptext("Not Enough Balance");
       setShowPopup(true);
 
       // Close the popup after 1000 milliseconds (1 second)
@@ -51,6 +54,35 @@ const Passengerbill = () => {
 
       localStorage.setItem("userInfo", JSON.stringify(storeddata));
       setUserInfo(storeddata);
+
+      const walletdata = {
+        username: userInfo.userInfo.username,
+        amount: -parseFloat(billdata.amount),
+      };
+      const requestOptions = {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(walletdata),
+      };
+      try {
+        const response = await fetch(
+          "http://localhost:3300/token",
+          requestOptions
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        } else {
+          setpopuptext("Bill Payed");
+          setShowPopup(true);
+
+          // Close the popup after 1000 milliseconds (1 second)
+          setTimeout(() => {
+            setShowPopup(false);
+          }, 1500);
+        }
+      } catch (error) {
+        console.error("Error adding amount:", error);
+      }
       navigate(`/Feedback/${drivername}`);
     }
   };
@@ -63,7 +95,7 @@ const Passengerbill = () => {
     <div className="bill-main">
       {showPopup && (
         <div className="popup">
-          <p>{`Not Enough Balance`}</p>
+          <p>{popuptext}</p>
         </div>
       )}
       <div className="bill-box">
@@ -77,13 +109,14 @@ const Passengerbill = () => {
         </div>
 
         <div className="bill-detail">
-          <div className="bill-input">username: {billdata.driver}</div>
+          <div className="bill-input">Driver: {billdata.driver}</div>
+          <div className="bill-input">Car No.: {billdata.carno} </div>
           <div className="bill-input">No. of Passenger: {billdata.seat}</div>
           <div className="bill-input">From: {billdata.from}</div>
           <div className="bill-input">To: {billdata.to}</div>
           <div className="bill-input">Date: {formattedDate}</div>
-          <div className="bill-input">Distance: {distanceTravelled}</div>
-          <div className="bill-input">amount: {billdata.amount}</div>
+          <div className="bill-input">Distance: {distanceTravelled} km</div>
+          <div className="bill-input">Amount: ${billdata.amount} </div>
           <div className="bill-btn">
             <button
               className="driverbill-btn"
@@ -91,7 +124,7 @@ const Passengerbill = () => {
                 handleconfirm();
               }}
             >
-              Pay from Wallet
+              Pay by Token
             </button>
             <button
               className="driverbill-btn"

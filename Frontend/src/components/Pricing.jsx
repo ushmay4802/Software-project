@@ -65,7 +65,7 @@ const Pricing = () => {
                 <path stroke="currentColor" d="M4 7.5L7 10l4-5" />
               </svg>
               <div style={{ marginLeft: "8px", fontSize: "1.5em" }}>
-                10🪙 for 9$
+                10&#x1FA99;for 9$
               </div>
             </div>
 
@@ -120,7 +120,7 @@ const Pricing = () => {
                 <path stroke="currentColor" d="M4 7.5L7 10l4-5" />
               </svg>
               <div style={{ marginLeft: "8px", fontSize: "1.5em" }}>
-                25🪙 for 22$
+                25&#x1FA99; for 22$
               </div>
             </div>
 
@@ -171,7 +171,7 @@ const Pricing = () => {
                 <path stroke="currentColor" d="M4 7.5L7 10l4-5" />
               </svg>
               <div style={{ marginLeft: "8px", fontSize: "1.5em" }}>
-                55🪙 for 45$
+                55&#x1FA99; for 45$
               </div>
             </div>
 

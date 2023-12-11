@@ -42,6 +42,30 @@ const Provideride = () => {
 
     setErrors(newErrors);
 
+    if (islicence.length !== 16) {
+      setErrors({ license: "not valid licence detail" });
+    }
+
+    if (iscarno.length < 7 || iscarno.length > 10) {
+      setErrors({ carno: "not valid car detail" });
+    }
+
+    if (iscarname.length < 2 || iscarname.length > 25) {
+      setErrors({ carname: "not valid car detail" });
+    }
+
+    if (ischarge > 1000) {
+      setErrors({ charge: "Provide charge less than 1000" });
+    }
+
+    if (isfrom.length < 2 || isfrom.length > 25) {
+      setErrors({ from: "Pickup location character should be 2 to 20" });
+    }
+
+    if (isto.length < 2 || isto.length > 25) {
+      setErrors({ to: "Drop location character should be 2 to 20" });
+    }
+
     if (Object.values(newErrors).some((error) => error !== "")) {
       return;
     }

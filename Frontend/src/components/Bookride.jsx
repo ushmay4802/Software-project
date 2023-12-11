@@ -35,6 +35,14 @@ const Bookride = () => {
 
     setErrors(newErrors);
 
+    if (isfrom.length > 25 || isfrom.length < 2) {
+      setErrors({ from: "should be between 2 to 25" });
+    }
+
+    if (isto.length > 25 || isto.length < 2) {
+      setErrors({ to: "should be between 2 to 25" });
+    }
+
     if (Object.values(newErrors).some((error) => error !== "")) {
       return;
     }
@@ -73,6 +81,7 @@ const Bookride = () => {
       userRequestData["from"] = rides.from;
       userRequestData["to"] = rides.to;
       userRequestData["driverUsername"] = rides.driver_username;
+      userRequestData["carno"] = rides.carno;
 
       const passengerRequest = {
         driverUsername: rides.driver_username,
@@ -147,11 +156,12 @@ const Bookride = () => {
 
         const userData = await res.json(); // Await the JSON parsing
         const billdata = {
-          driver: "ushmay",
+          driver: userData.driver,
           from: isfrom,
           to: isto,
           seat: ispassengercount,
           amount: 10 * 10,
+          carno: userData.carno,
         };
         const driverdata = encodeURIComponent(JSON.stringify(billdata));
         if (userData.flg === "false") {
@@ -167,7 +177,7 @@ const Bookride = () => {
 
     const intervalId = setInterval(() => {
       fetchFlag();
-    }, 1000);
+    }, 5000);
 
     // Cleanup: Clear the interval when the component unmounts
     return () => {
@@ -285,9 +295,9 @@ const Bookride = () => {
                   <div key={index} className="order">
                     <div className="textstyle">
                       Driver Username: {rides.driver_username} &nbsp; &nbsp;
-                      &nbsp; &nbsp;Gender:Male &nbsp; &nbsp; &nbsp; &nbsp;Seats
-                      Available: {rides.seat} &nbsp; &nbsp; &nbsp; &nbsp;
-                      Charge(per km): {rides.charge}
+                      &nbsp; &nbsp;Gender:Male &nbsp; &nbsp; &nbsp; &nbsp;Car
+                      No.: {rides.carno} &nbsp; &nbsp; &nbsp; &nbsp; Charge(per
+                      km): {rides.charge}
                     </div>
                     <button
                       className="confirm-btn"
