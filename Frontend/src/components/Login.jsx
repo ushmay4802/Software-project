@@ -13,15 +13,15 @@ const Login = () => {
   const { setUserInfo } = useUser();
   const navigate = useNavigate();
   const handleLogin = async () => {
-    // if (usernamein.length > 12 || usernamein.length < 5) {
-    //   setError("username should be 5 to 12 character");
-    //   return;
-    // }
+    if (usernamein.length > 12 || usernamein.length < 5) {
+      setError("username should be 5 to 12 character");
+      return;
+    }
 
-    // if (passwordin.length < 8 || passwordin.length > 12) {
-    //   setError("Password should be 8 to 12 character");
-    //   return;
-    // }
+    if (passwordin.length < 8 || passwordin.length > 12) {
+      setError("Password should be 8 to 12 character");
+      return;
+    }
 
     try {
       setIsLoading(true);
