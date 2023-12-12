@@ -25,23 +25,32 @@ const Login = () => {
 
     try {
       setIsLoading(true);
+
+      const loginData = {
+        username: usernamein,
+        password: passwordin,
+      };
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(loginData),
+      };
       const response = await fetch(
-        `http://localhost:3300/userdetail/${usernamein}`
+        `http://localhost:3300/userdetail`,
+        requestOptions
       );
 
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const dataarray = await response.json();
-      const data = dataarray.length > 0 ? dataarray[0] : null;
-
-      if (data && data.password === passwordin) {
-        await setUserInfo(data);
-        navigate("/Layout");
-      } else {
+        console.log("Wrong");
         setError("Incorrect username or password");
+        return;
       }
+
+      const data = await response.json();
+      console.log(data);
+
+      await setUserInfo(data);
+      navigate("/Layout");
     } catch (error) {
       console.error("Error fetching data:", error);
       setError("Provide valid details");

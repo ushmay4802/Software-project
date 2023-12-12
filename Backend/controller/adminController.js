@@ -1,5 +1,6 @@
 const Admin = require("../models/admin");
 
+
 exports.confirmRide = async (req,ress) =>{
 
 
@@ -14,6 +15,8 @@ TotalPassenger: req.body.passenger,
 DistanceTravelled: req.body.distance,
 Amount: req.body.amount,
     }
+
+ 
 
     await Admin.Admin.create(confirmData)
     .then((res)=>{

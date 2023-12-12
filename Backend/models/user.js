@@ -8,11 +8,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     maxLength: 15,
   },
-  username: { type: String, unique: true, minLength: 5, maxLength: 10 },
+  username: { type: String, unique: true, minLength: 5, maxLength: 15 },
   password: {
     type: String,
-    minLength: 8,
-    maxLength: 10,
   },
   dob: Date,
   phone: {
