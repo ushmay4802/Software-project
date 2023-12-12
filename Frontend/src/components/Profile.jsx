@@ -18,7 +18,9 @@ const Profile = () => {
     const fetchdriver = async () => {
       try {
         const driver = profileData.username;
-        const res = await fetch(`http://localhost:3300/driverride/${driver}`);
+        const res = await fetch(
+          `https://software-gratler.onrender.com/driverride/${driver}`
+        );
 
         if (!res.ok) {
           throw new Error(`HTTP error! Status: ${res.status}`);
@@ -36,7 +38,7 @@ const Profile = () => {
         const passenger = profileData.username;
 
         const res = await fetch(
-          `http://localhost:3300/passengerride/${passenger}`
+          `https://software-gratler.onrender.com/passengerride/${passenger}`
         );
 
         if (!res.ok) {

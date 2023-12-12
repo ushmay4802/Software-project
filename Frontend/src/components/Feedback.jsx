@@ -38,7 +38,10 @@ const Feedback = () => {
         body: JSON.stringify(feedbackData),
       };
 
-      const res = await fetch(`http://localhost:3300/feedback`, requestOptions);
+      const res = await fetch(
+        `https://software-gratler.onrender.com/feedback`,
+        requestOptions
+      );
       if (!res.ok) {
         throw new Error(`HTTP error! Status: ${res.status}`);
       }

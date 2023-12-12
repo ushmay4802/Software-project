@@ -110,7 +110,10 @@ const RegistrationForm = () => {
       body: JSON.stringify(userData),
     };
     try {
-      const res = await fetch("http://localhost:3300/newuser", requestOptions);
+      const res = await fetch(
+        "https://software-gratler.onrender.com/newuser",
+        requestOptions
+      );
       if (!res.ok) {
         throw new Error(`HTTP error! Status: ${res.status}`);
       } else {

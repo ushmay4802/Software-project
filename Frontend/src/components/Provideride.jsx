@@ -87,7 +87,7 @@ const Provideride = () => {
       body: JSON.stringify(ridedetail),
     };
 
-    fetch("http://localhost:3300/ridedetails", requestOptions)
+    fetch("https://software-gratler.onrender.com/ridedetails", requestOptions)
       .then((res) => {
         console.log("resse", res);
 

@@ -51,7 +51,7 @@ const Driverbill = () => {
     };
     try {
       const response = await fetch(
-        "http://localhost:3300/token",
+        "https://software-gratler.onrender.com/token",
         requestOptions
       );
       if (!response.ok) {
@@ -68,7 +68,7 @@ const Driverbill = () => {
         body: JSON.stringify(confirmRide),
       };
       const res = await fetch(
-        `http://localhost:3300/confirmRide`,
+        `https://software-gratler.onrender.com/confirmRide`,
         requestOptions
       );
       if (!res.ok) {

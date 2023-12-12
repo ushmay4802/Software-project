@@ -17,7 +17,7 @@ const Passengerlist = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3300/passengerRequest/${userInfo.username}`
+          `https://software-gratler.onrender.com/passengerRequest/${userInfo.username}`
         );
 
         if (!response.ok) {
@@ -66,7 +66,7 @@ const Passengerlist = () => {
       };
 
       const res = await fetch(
-        `http://localhost:3300/requestDelete`,
+        `https://software-gratler.onrender.com/requestDelete`,
         requestOptions
       );
 

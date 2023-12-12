@@ -36,7 +36,7 @@ const Login = () => {
         body: JSON.stringify(loginData),
       };
       const response = await fetch(
-        `http://localhost:3300/userdetail`,
+        `https://software-gratler.onrender.com/userdetail`,
         requestOptions
       );
 

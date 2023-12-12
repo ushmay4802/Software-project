@@ -49,7 +49,7 @@ const Bookride = () => {
 
     try {
       const rideresponse = await fetch(
-        `http://localhost:3300/passengerride/${ispassengercount}/${isfrom}/${isto}`
+        `https://software-gratler.onrender.com/passengerride/${ispassengercount}/${isfrom}/${isto}`
       );
 
       if (!rideresponse.ok) {
@@ -97,7 +97,7 @@ const Bookride = () => {
         };
 
         const res = await fetch(
-          `http://localhost:3300/passengerlist`,
+          `https://software-gratler.onrender.com/passengerlist`,
           requestOptions
         );
 
@@ -122,7 +122,7 @@ const Bookride = () => {
           body: JSON.stringify(deleteRequest),
         };
         const res = await fetch(
-          `http://localhost:3300/singleRequest`,
+          `https://software-gratler.onrender.com/singleRequest`,
           requestOptions
         );
 
@@ -147,7 +147,7 @@ const Bookride = () => {
 
       try {
         const res = await fetch(
-          `http://localhost:3300/confirmbook/${userName}`
+          `https://software-gratler.onrender.com/confirmbook/${userName}`
         );
 
         if (!res.ok) {

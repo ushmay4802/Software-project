@@ -22,7 +22,7 @@ import Feedback from "./components/Feedback";
 
 function App() {
   // useEffect(() => {
-  // 	fetch("http://localhost:3300/ride").then((response) => {response.json().then((res)=>{
+  // 	fetch("https://software-gratler.onrender.com/ride").then((response) => {response.json().then((res)=>{
   //   console.log(res);
   //   setData(res)
   // })})
